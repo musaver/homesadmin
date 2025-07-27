@@ -163,7 +163,7 @@ export default function SettingsPage() {
 
       <div className="space-y-8">
         {/* Stock Management Section */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hidden">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-xl font-semibold text-gray-800">Stock Management</h2>

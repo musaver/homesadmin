@@ -61,6 +61,7 @@ interface OrderItem {
   variantId?: string;
   productName: string;
   variantTitle?: string;
+  variationPrice?: number;
   sku?: string;
   quantity: number;
   price: number;
@@ -606,12 +607,24 @@ export default function EditOrder() {
                             return parsedAddons.length > 0 ? (
                               <div>
                                 <div className="text-sm">Base: {formatCurrency(item.price)} x {item.quantity}</div>
+                                {item.variationPrice && item.variationPrice !== item.price && (
+                                  <div className="text-xs text-blue-600">
+                                    Variant Price: {formatCurrency(item.variationPrice)}
+                                  </div>
+                                )}
                                 <div className="text-xs text-gray-500">
                                   +Addons: {formatCurrency(parsedAddons.reduce((sum, addon) => sum + ((Number(addon.price) || 0) * (Number(addon.quantity) || 1)), 0))} x {item.quantity}
                                 </div>
                               </div>
                             ) : (
-                              <div>{formatCurrency(item.price)} x {item.quantity}</div>
+                              <div>
+                                <div>{formatCurrency(item.price)} x {item.quantity}</div>
+                                {item.variationPrice && item.variationPrice !== item.price && (
+                                  <div className="text-xs text-blue-600">
+                                    Variant Price: {formatCurrency(item.variationPrice)}
+                                  </div>
+                                )}
+                              </div>
                             );
                           })()}
                         </div>

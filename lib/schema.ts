@@ -279,7 +279,7 @@ export const orders = mysqlTable("orders", {
   paymentStatus: varchar("payment_status", { length: 50 }).default("pending"), // pending, paid, failed, refunded
   fulfillmentStatus: varchar("fulfillment_status", { length: 50 }).default("pending"), // pending, fulfilled, partially_fulfilled
   subtotal: decimal("subtotal", { precision: 10, scale: 2 }).notNull(),
-  taxAmount: decimal("tax_amount", { precision: 10, scale: 2 }).default('0.00'),
+  taxAmount: varchar("tax_amount", { length: 255 }).default('0.00,0.00'), // Format: "vatAmount,serviceAmount"
   shippingAmount: decimal("shipping_amount", { precision: 10, scale: 2 }).default('0.00'),
   discountAmount: decimal("discount_amount", { precision: 10, scale: 2 }).default('0.00'),
   totalAmount: decimal("total_amount", { precision: 10, scale: 2 }).notNull(),
@@ -326,6 +326,7 @@ export const orderItems = mysqlTable("order_items", {
   variantId: varchar("variant_id", { length: 255 }),
   productName: varchar("product_name", { length: 255 }).notNull(),
   variantTitle: varchar("variant_title", { length: 255 }),
+  variationPrice: decimal("variation_price", { precision: 10, scale: 2 }),
   sku: varchar("sku", { length: 100 }),
   quantity: int("quantity").notNull(),
   price: decimal("price", { precision: 10, scale: 2 }).notNull(),

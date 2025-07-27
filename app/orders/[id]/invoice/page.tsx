@@ -322,12 +322,24 @@ export default function OrderInvoice() {
                                 return parsedAddons.length > 0 ? (
                                   <div>
                                     <div className="text-sm">Base: {formatAmount(item.price)}</div>
+                                    {item.variationPrice && item.variationPrice !== item.price && (
+                                      <div className="text-xs text-blue-600">
+                                        Variant: {formatAmount(item.variationPrice)}
+                                      </div>
+                                    )}
                                     <div className="text-xs text-gray-500">
                                       +Addons: {formatAmount(parsedAddons.reduce((sum: number, addon: any) => sum + ((Number(addon.price) || 0) * (Number(addon.quantity) || 1)), 0))}
                                     </div>
                                   </div>
                                 ) : (
-                                  formatAmount(item.price)
+                                  <div>
+                                    <div>{formatAmount(item.price)}</div>
+                                    {item.variationPrice && item.variationPrice !== item.price && (
+                                      <div className="text-xs text-blue-600">
+                                        Variant: {formatAmount(item.variationPrice)}
+                                      </div>
+                                    )}
+                                  </div>
                                 );
                               })()}
                             </td>
