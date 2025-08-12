@@ -86,6 +86,7 @@ export const categories = mysqlTable("categories", {
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   description: text("description"),
   image: varchar("image", { length: 500 }),
+  bannerImage: varchar("banner_image", { length: 500 }), // Category banner image
   icon: varchar("icon", { length: 500 }), // For uploaded category icon files
   iconName: varchar("icon_name", { length: 100 }), // For category icons (e.g., FontAwesome icon names)
   isFeatured: boolean("is_featured").default(false), // For featured categories

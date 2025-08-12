@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import imageCompression from 'browser-image-compression';
 
 interface ImageUploaderProps {
@@ -9,6 +9,7 @@ interface ImageUploaderProps {
   label?: string;
   disabled?: boolean;
   directory?: 'courses' | 'batches' | 'general' | 'products' | 'products/banner' | 'category-icons';
+  id?: string;
 }
 
 export default function ImageUploader({
@@ -17,11 +18,20 @@ export default function ImageUploader({
   onImageRemove,
   label = "Upload Image",
   disabled = false,
-  directory = 'general'
+  directory = 'general',
+  id
 }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Generate unique ID if not provided
+  const uploaderId = id || `image-upload-${Math.random().toString(36).substr(2, 9)}`;
+
+  // Sync preview with currentImage prop changes
+  useEffect(() => {
+    setPreview(currentImage || null);
+  }, [currentImage]);
 
   const compressImage = async (file: File): Promise<File> => {
     const options = {
@@ -136,10 +146,10 @@ export default function ImageUploader({
           onChange={handleFileChange}
           disabled={disabled || uploading}
           className="hidden"
-          id="image-upload"
+          id={uploaderId}
         />
         <label
-          htmlFor="image-upload"
+          htmlFor={uploaderId}
           className={`cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
             disabled || uploading ? 'opacity-50 cursor-not-allowed' : ''
           }`}

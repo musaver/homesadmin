@@ -62,6 +62,7 @@ export default function CategoriesList() {
           <thead>
             <tr className="bg-gray-100">
               <th className="border p-2 text-left">Image</th>
+              <th className="border p-2 text-left">Banner Image</th>
               <th className="border p-2 text-left">Name</th>
               <th className="border p-2 text-left">Slug</th>
               <th className="border p-2 text-left">Sort Order</th>
@@ -84,6 +85,19 @@ export default function CategoriesList() {
                     ) : (
                       <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-500 text-xs">
                         No Image
+                      </div>
+                    )}
+                  </td>
+                  <td className="border p-2">
+                    {category.bannerImage ? (
+                      <img 
+                        src={category.bannerImage} 
+                        alt={`${category.name} Banner`}
+                        className="w-20 h-12 object-cover rounded"
+                      />
+                    ) : (
+                      <div className="w-20 h-12 bg-gray-200 rounded flex items-center justify-center text-gray-500 text-xs">
+                        No Banner
                       </div>
                     )}
                   </td>
@@ -120,7 +134,7 @@ export default function CategoriesList() {
               ))
             ) : (
               <tr>
-                <td colSpan={7} className="border p-2 text-center">No categories found</td>
+                <td colSpan={8} className="border p-2 text-center">No categories found</td>
               </tr>
             )}
           </tbody>

@@ -12,6 +12,7 @@ export default function AddCategory() {
     slug: '',
     description: '',
     image: '',
+    bannerImage: '',
     iconName: '',
     isFeatured: false,
     parentId: '',
@@ -76,6 +77,14 @@ export default function AddCategory() {
 
   const handleImageRemove = () => {
     setFormData({ ...formData, image: '' });
+  };
+
+  const handleBannerImageUpload = (imageUrl: string) => {
+    setFormData({ ...formData, bannerImage: imageUrl });
+  };
+
+  const handleBannerImageRemove = () => {
+    setFormData({ ...formData, bannerImage: '' });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -216,6 +225,19 @@ export default function AddCategory() {
             label="Category Image"
             disabled={submitting}
             directory="products"
+            id="category-image-upload"
+          />
+        </div>
+
+        <div className="mb-4">
+          <ImageUploader
+            currentImage={formData.bannerImage}
+            onImageUpload={handleBannerImageUpload}
+            onImageRemove={handleBannerImageRemove}
+            label="Category Banner Image"
+            disabled={submitting}
+            directory="products"
+            id="category-banner-upload"
           />
         </div>
 

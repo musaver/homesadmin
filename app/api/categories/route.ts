@@ -15,7 +15,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, slug, description, image, icon, iconName, isFeatured, parentId, sortOrder, isActive } = await req.json();
+    const { name, slug, description, image, bannerImage, icon, iconName, isFeatured, parentId, sortOrder, isActive } = await req.json();
     
     // Validate required fields
     if (!name) {
@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
       slug: slug || name.toLowerCase().replace(/\s+/g, '-'),
       description: description || null,
       image: image || null,
+      bannerImage: bannerImage || null,
       icon: icon || null,
       iconName: iconName || null,
       isFeatured: isFeatured !== undefined ? isFeatured : false,
