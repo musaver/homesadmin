@@ -30,7 +30,7 @@
     "browser-image-compression": "^2.0.2",
     "drizzle-orm": "^0.43.1",
     "mysql2": "^3.14.1",
-    "next": "15.3.2",
+    "next": "15.3.8",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
